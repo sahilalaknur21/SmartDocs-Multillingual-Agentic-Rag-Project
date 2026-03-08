@@ -1,0 +1,25 @@
+# WHY THIS EXISTS: Track and cap costs in INR per query.
+
+
+embedding:
+  model: "intfloat/multilingual-e5-large"
+  cost_per_query_inr: 0.00    # Local RTX GPU — zero API cost
+
+reranking:
+  model: "flashrank"
+  cost_per_query_inr: 0.00    # Local CPU — zero API cost
+
+generation:
+  model: "sarvam-m"
+  cost_per_1k_tokens_inr: 0.83  # Approximate — verify at dashboard.sarvam.ai
+  avg_tokens_per_query: 800
+  avg_cost_per_query_inr: 0.66
+
+web_search_crag:
+  provider: "tavily"
+  cost_per_search_inr: 0.08   # Approximate — verify at app.tavily.com
+
+ceilings:
+  max_cost_per_query_inr: 2.00      # Alert if single query exceeds this
+  max_daily_cost_inr: 500.00        # Alert if daily total exceeds this
+  max_monthly_cost_inr: 10000.00    # Hard ceiling for solo operator

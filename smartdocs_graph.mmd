@@ -1,0 +1,40 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	preprocess_node(preprocess_node)
+	serve_cache_node(serve_cache_node)
+	transform_node(transform_node)
+	retrieve_node(retrieve_node)
+	rerank_node(rerank_node)
+	crag_node(crag_node)
+	assemble_context_node(assemble_context_node)
+	generate_node(generate_node)
+	critique_node(critique_node)
+	guardrail_node(guardrail_node)
+	insufficient_node(insufficient_node)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> preprocess_node;
+	assemble_context_node --> generate_node;
+	crag_node --> assemble_context_node;
+	critique_node -.-> guardrail_node;
+	critique_node -.-> insufficient_node;
+	critique_node -.-> retrieve_node;
+	generate_node --> critique_node;
+	preprocess_node -.-> serve_cache_node;
+	preprocess_node -.-> transform_node;
+	rerank_node -.-> assemble_context_node;
+	rerank_node -.-> crag_node;
+	rerank_node -.-> insufficient_node;
+	retrieve_node --> rerank_node;
+	transform_node --> retrieve_node;
+	guardrail_node --> __end__;
+	insufficient_node --> __end__;
+	rerank_node -.-> __end__;
+	serve_cache_node --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

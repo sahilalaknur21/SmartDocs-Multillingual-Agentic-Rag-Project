@@ -1,0 +1,35 @@
+# WHY THIS EXISTS: All retrieval tuning parameters in one place.
+
+
+chunking:
+  devanagari:
+    chunk_size: 400        # Devanagari is denser than Latin — 400 not 500
+    chunk_overlap: 40      # 10% overlap
+  latin:
+    chunk_size: 500
+    chunk_overlap: 50      # 10% overlap
+  parent_chunk_size: 1024  # Parent chunk for context assembly
+  child_chunk_size: 256    # Child chunk for retrieval precision
+
+retrieval:
+  dense_weight: 0.7        # Weight for multilingual-e5-large dense retrieval
+  sparse_weight: 0.3       # Weight for BM25 sparse retrieval
+  top_k_candidates: 20     # Retrieve top-20 before reranking
+  top_k_final: 5           # Pass top-5 to Sarvam-30B after reranking
+
+reranker:
+  proceed_threshold: 0.7   # Score above this → proceed to generation
+  crag_threshold: 0.3      # Score below this → insufficient information
+                           # Score between 0.3-0.7 → CRAG web search fallback
+
+cache:
+  similarity_threshold: 0.95   # Cosine similarity for cache hit
+  ttl_seconds: 3600            # Cache expiry: 1 hour
+
+language:
+  confidence_threshold: 0.85   # Below this → default to English
+  default_language: "en"
+
+context_assembly:
+  max_chunks_per_source: 2     # Source diversity — max 2 chunks per document
+  context_budget_ratio: 0.70   # 70% of context window for retrieved chunks

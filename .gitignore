@@ -1,0 +1,45 @@
+# .gitignore
+
+# CRITICAL — Never commit secrets
+.env
+
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# HuggingFace model cache
+.cache/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets scanner
+.secrets.baseline
+
+# Logs
+*.log
+logs/
+.env
