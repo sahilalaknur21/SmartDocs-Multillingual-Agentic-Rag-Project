@@ -55,6 +55,14 @@ class DenseEmbedder:
         )
 
         return self._model
+    
+    
+    async def warmup(self) -> None:
+        """Pre-loads model so first real request is not slow."""
+        import asyncio
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(None, lambda: self.embed_passages(["warmup"]))
+    
 
     @property
     def model(self) -> SentenceTransformer:

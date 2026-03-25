@@ -1,45 +1,70 @@
-# api/middleware/user_context.py
-# WHY THIS EXISTS: Injects user_id into every API request state.
-# Missing X-User-ID header = 401 before retrieval runs. LAW 6.
+# smartdocs/api/middleware/user_context.py
+"""
+WHY THIS EXISTS:
+Every DB query requires a user_id for RLS enforcement. LAW 6.
+This middleware extracts user_id from the X-User-ID header and injects
+it into request.state so every route handler can access it without
+passing it through function arguments.
+
+IN DEVELOPMENT: If X-User-ID header is missing, defaults to "dev_user".
+IN PRODUCTION: Missing X-User-ID returns 401. Set ENVIRONMENT=production in .env.
+
+WHY MIDDLEWARE AND NOT A DEPENDENCY:
+A FastAPI Depends() function would require every route to declare it.
+Middleware runs on every request unconditionally — user_id is always available.
+One place to change auth logic. No route can accidentally skip it.
+"""
+
+from __future__ import annotations
 
 import logging
+
+from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi import Request
-from fastapi.responses import JSONResponse
+
+from config.settings import get_settings
 
 logger = logging.getLogger(__name__)
+settings = get_settings()
 
-EXEMPT_PATHS = {"/health", "/docs", "/openapi.json", "/redoc"}
+# Development fallback — NEVER use in production
+_DEV_USER_ID = "dev_user_001"
 
 
 class UserContextMiddleware(BaseHTTPMiddleware):
     """
-    Extracts user_id from X-User-ID request header.
-    Injects into request.state.user_id.
-    All route handlers read from request.state.user_id — never hardcode.
+    Extracts user_id from X-User-ID header.
+    Injects into request.state.user_id for use in route handlers.
 
-    Production upgrade path: replace header extraction with JWT validation.
+    Development mode (ENVIRONMENT=development):
+      Missing header → default to "dev_user_001" + log warning
+    Production mode (ENVIRONMENT=production):
+      Missing header → 401 Unauthorized
+
+    Usage in route handlers:
+      user_id = request.state.user_id
     """
 
-    async def dispatch(self, request: Request, call_next):
-        if request.url.path in EXEMPT_PATHS:
-            return await call_next(request)
-
+    async def dispatch(self, request: Request, call_next) -> Response:
         user_id = request.headers.get("X-User-ID", "").strip()
 
         if not user_id:
-            logger.warning(
-                "Request rejected — missing X-User-ID",
-                extra={"path": request.url.path},
-            )
-            return JSONResponse(
-                status_code=401,
-                content={
-                    "error": "Missing X-User-ID header",
-                    "detail": "All requests require X-User-ID header for per-user isolation.",
-                },
-            )
+            if settings.environment == "production":
+                logger.warning(
+                    "[middleware] Missing X-User-ID in production — returning 401"
+                )
+                return Response(
+                    content='{"detail": "X-User-ID header is required"}',
+                    status_code=401,
+                    media_type="application/json",
+                )
+            else:
+                # Development: allow requests without auth header
+                user_id = _DEV_USER_ID
+                logger.debug(
+                    f"[middleware] No X-User-ID header — using dev default: {_DEV_USER_ID}"
+                )
 
         request.state.user_id = user_id
-        logger.debug("User context set", extra={"user_id": user_id})
-        return await call_next(request)
+        response = await call_next(request)
+        return response

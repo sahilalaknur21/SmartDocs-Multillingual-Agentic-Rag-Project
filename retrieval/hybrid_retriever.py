@@ -3,6 +3,11 @@
 # Dense-only loses 15-25% of retrievable Hindi answers.
 # BM25 catches exact keyword matches dense misses.
 # top-20 candidates → reranker → top-5.
+#
+# FIX: get_pgvector_client() is a synchronous singleton getter.
+# Original code had `client = await get_pgvector_client()` which throws:
+#   TypeError: object PgVectorClient can't be used in 'await' expression
+# Every query call was broken. Fixed: remove the await.
 
 import asyncio
 import logging
@@ -55,26 +60,14 @@ def _reciprocal_rank_fusion(
 
     k=60 is standard RRF constant.
     Reduces impact of top-ranked outliers.
-
-    Args:
-        dense_results: pgvector similarity search results
-        sparse_results: BM25 (chunk_index, score, text) tuples
-        dense_weight: 0.7 per spec
-        sparse_weight: 0.3 per spec
-        k: RRF constant
-
-    Returns:
-        Sorted list of (chunk_id, rrf_score) descending
     """
     rrf_scores: dict[str, float] = {}
 
-    # Dense ranking
     for rank, result in enumerate(dense_results, start=1):
         chunk_id = result["chunk_id"]
         rrf_scores[chunk_id] = rrf_scores.get(chunk_id, 0.0)
         rrf_scores[chunk_id] += dense_weight * (1.0 / (k + rank))
 
-    # Sparse ranking — match text prefix to dense result chunk_ids
     text_to_chunk_id = {
         r.get("chunk_text", "")[:100]: r["chunk_id"]
         for r in dense_results
@@ -100,48 +93,38 @@ async def retrieve(
     Single-query hybrid retrieval: dense + BM25 + RRF.
     Mandatory "query: " prefix on embedding. LAW 4.
     Per-user isolation enforced via pgvector_client. LAW 6.
-
-    Args:
-        query: User query text
-        user_id: Current user for RLS
-        lang_result: Language detection result
-        doc_id: Optional — restrict to specific document
-        top_k_candidates: Candidates before reranking (default: 20)
-
-    Returns:
-        List of RetrievedChunk sorted by RRF score
     """
     start = time.perf_counter()
 
     embedder = get_embedder()
-    client = await get_pgvector_client()
+    # FIX: get_pgvector_client() is synchronous — no await
+    client = get_pgvector_client()
 
-    # Step 1: Embed query — MANDATORY "query: " prefix (LAW 4)
+    if client._pool is None:
+        await client.connect()
+
+    # LAW 4: "query: " prefix mandatory at retrieval
     query_embedding = embedder.embed_query(query)
 
-    # Step 2: Dense retrieval from pgvector
     dense_raw = await client.similarity_search(
         query_embedding=query_embedding,
         user_id=user_id,
         doc_id=doc_id,
         top_k=top_k_candidates,
-        exclude_injection_risk=True,
     )
 
     if not dense_raw:
         logger.warning(
             "Dense retrieval returned zero results",
-            extra={"query": query, "user_id": user_id, "doc_id": doc_id},
+            extra={"query": query[:80], "user_id": user_id, "doc_id": doc_id},
         )
         return []
 
-    # Step 3: BM25 sparse retrieval on same corpus
     bm25_corpus = [r.get("chunk_text", "") for r in dense_raw]
     sparse_embedder = SparseEmbedder(lang_code=lang_result.language_code)
     sparse_embedder.build_index(bm25_corpus)
     sparse_raw = sparse_embedder.get_top_n(query, n=top_k_candidates)
 
-    # Step 4: RRF fusion
     rrf_ranked = _reciprocal_rank_fusion(
         dense_results=dense_raw,
         sparse_results=sparse_raw,
@@ -149,7 +132,6 @@ async def retrieve(
         sparse_weight=settings.sparse_weight,
     )
 
-    # Step 5: Assemble RetrievedChunk objects
     chunk_map = {r["chunk_id"]: r for r in dense_raw}
     sparse_text_score_map = {t[:100]: s for _, s, t in sparse_raw}
 
@@ -203,22 +185,10 @@ async def retrieve_multi_query(
     """
     Runs hybrid retrieval for ALL query variants in PARALLEL.
     Deduplicates by chunk_id — keeps highest RRF score.
-    Called with TransformedQueries.all_queries from query_transformer.
-
-    Args:
-        queries: All variants from transform_query().all_queries
-        user_id: Current user
-        lang_result: Language detection result
-        doc_id: Optional document filter
-        top_k_candidates: Candidates per query
-
-    Returns:
-        Deduplicated top-20 by best RRF score
     """
     if not queries:
         return []
 
-    # Run all queries in parallel
     all_results = await asyncio.gather(
         *[
             retrieve(
@@ -233,7 +203,6 @@ async def retrieve_multi_query(
         return_exceptions=True,
     )
 
-    # Deduplicate — keep highest RRF score per chunk_id
     best: dict[str, RetrievedChunk] = {}
     for outcome in all_results:
         if isinstance(outcome, Exception):

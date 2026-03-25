@@ -43,3 +43,8 @@ Thumbs.db
 *.log
 logs/
 .env
+
+indic_nlp_resources/
+*.zip
+*.pdf
+.smartdocs_session.json

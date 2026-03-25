@@ -1,0 +1,662 @@
+[
+  {
+    "id": "en_001",
+    "language": "en",
+    "query": "What is the total GST liability mentioned in the notice?",
+    "ground_truth": "The total GST liability is ₹2,45,000 comprising tax of ₹2,00,000, interest of ₹25,000, and penalty of ₹20,000.",
+    "contexts": [
+      "The taxpayer is liable to pay GST of ₹2,00,000 along with interest of ₹25,000 at 18% per annum and a penalty of ₹20,000 under Section 73 of the CGST Act 2017. Total outstanding: ₹2,45,000."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_002",
+    "language": "en",
+    "query": "What is the deadline to respond to the show cause notice?",
+    "ground_truth": "The taxpayer must respond to the show cause notice within 30 days from the date of receipt of this notice.",
+    "contexts": [
+      "You are hereby directed to show cause within 30 days from the date of receipt of this notice as to why the tax demand of ₹2,00,000 should not be confirmed against you under Section 73(9) of the CGST Act 2017."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_003",
+    "language": "en",
+    "query": "Under which section is the penalty imposed?",
+    "ground_truth": "The penalty is imposed under Section 73(9) of the CGST Act 2017 for non-payment of tax.",
+    "contexts": [
+      "A penalty of ₹20,000 has been imposed under Section 73(9) of the Central Goods and Services Tax Act, 2017, for failure to pay the tax due on the supply of goods and services during the financial year 2022-23."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_004",
+    "language": "en",
+    "query": "What financial year does this GST notice pertain to?",
+    "ground_truth": "This GST notice pertains to the financial year 2022-23.",
+    "contexts": [
+      "This notice is issued for the tax period April 2022 to March 2023 (Financial Year 2022-23) in respect of non-payment and short payment of Integrated GST, Central GST and State GST on taxable supplies."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_005",
+    "language": "en",
+    "query": "What is the interest rate applied on the outstanding GST amount?",
+    "ground_truth": "The interest rate applied on the outstanding GST amount is 18% per annum.",
+    "contexts": [
+      "Interest has been calculated at 18% per annum on the principal tax amount of ₹2,00,000 for the period of default in accordance with Section 50 of the CGST Act 2017, amounting to ₹25,000."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_006",
+    "language": "en",
+    "query": "What is the maximum sum insured under this health insurance policy?",
+    "ground_truth": "The maximum sum insured under this health insurance policy is ₹10,00,000 (Ten Lakhs) per policy year.",
+    "contexts": [
+      "The maximum sum insured under this Individual Health Insurance Policy shall be ₹10,00,000 (Rupees Ten Lakhs only) per policy year. This limit applies to all hospitalisation expenses including pre and post hospitalisation costs."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_007",
+    "language": "en",
+    "query": "What is the waiting period for pre-existing diseases?",
+    "ground_truth": "The waiting period for pre-existing diseases is 36 months of continuous coverage from the policy inception date.",
+    "contexts": [
+      "Pre-existing Diseases (PED) as declared at the time of policy issuance will be covered after a waiting period of 36 (thirty-six) months of continuous coverage under this policy from the date of inception of the first policy."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_008",
+    "language": "en",
+    "query": "Is maternity coverage included in this policy?",
+    "ground_truth": "Maternity coverage is included subject to a 24-month waiting period and a sub-limit of ₹50,000 for normal delivery and ₹75,000 for caesarean delivery.",
+    "contexts": [
+      "Maternity expenses including normal delivery (sub-limit ₹50,000) and caesarean delivery (sub-limit ₹75,000) are covered after a waiting period of 24 months. Newborn baby coverage up to 90 days is included within the maternity sub-limit."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_009",
+    "language": "en",
+    "query": "What is the co-payment clause in this policy?",
+    "ground_truth": "A 20% co-payment applies for policyholders above 60 years of age for all claims.",
+    "contexts": [
+      "Co-payment Clause: For insured persons aged 60 years and above at the time of claim, a co-payment of 20% of the admissible claim amount shall be applicable. No co-payment is applicable for insured persons below 60 years of age."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_010",
+    "language": "en",
+    "query": "What documents are required for cashless hospitalisation?",
+    "ground_truth": "For cashless hospitalisation, the insured must present the health card, government-issued photo ID, and submit a pre-authorisation request at least 48 hours before planned procedures.",
+    "contexts": [
+      "For availing cashless facility: (1) Present Health Card issued by the insurer at the time of admission, (2) Provide government-issued photo ID proof, (3) Submit pre-authorisation request 48 hours prior for planned hospitalisation or within 24 hours for emergency admission."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_011",
+    "language": "en",
+    "query": "What is the lock-in period for this lease agreement?",
+    "ground_truth": "The lock-in period for this lease agreement is 36 months from the commencement date.",
+    "contexts": [
+      "The Lessee agrees to a lock-in period of thirty-six (36) months from the date of commencement of this lease. During the lock-in period, neither party shall terminate this agreement without payment of a penalty equivalent to 3 months' rent."
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_012",
+    "language": "en",
+    "query": "What is the monthly rent and when is it due?",
+    "ground_truth": "The monthly rent is ₹85,000 payable by the 5th of each calendar month.",
+    "contexts": [
+      "The Lessee shall pay a monthly rent of ₹85,000 (Rupees Eighty-Five Thousand only) on or before the 5th day of each calendar month. A late payment charge of 2% per month shall apply on delayed payments beyond the 10th of the month."
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_013",
+    "language": "en",
+    "query": "What is the security deposit amount and how will it be returned?",
+    "ground_truth": "The security deposit is ₹2,55,000 (three months' rent) and will be returned within 30 days of vacating after deducting damages.",
+    "contexts": [
+      "A refundable security deposit of ₹2,55,000 (equivalent to three months' rent) has been paid by the Lessee. The deposit shall be returned within 30 days of the Lessee vacating the premises, after deduction of any dues or damages caused by the Lessee beyond normal wear and tear."
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_014",
+    "language": "en",
+    "query": "What is the arbitration clause in this agreement?",
+    "ground_truth": "Disputes shall be referred to a sole arbitrator mutually appointed under the Arbitration and Conciliation Act 1996, with proceedings in Mumbai.",
+    "contexts": [
+      "Dispute Resolution: Any dispute arising out of or in connection with this Agreement shall be referred to arbitration before a sole arbitrator to be mutually appointed by both parties under the Arbitration and Conciliation Act, 1996. The seat and venue of arbitration shall be Mumbai."
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_015",
+    "language": "en",
+    "query": "Can the lessee sublet the premises?",
+    "ground_truth": "The lessee cannot sublet the premises without prior written consent of the lessor.",
+    "contexts": [
+      "The Lessee shall not sublet, assign, or transfer the premises or any part thereof to any third party without obtaining prior written consent of the Lessor. Any unauthorised subletting shall be grounds for immediate termination of this lease."
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_016",
+    "language": "en",
+    "query": "What is the effective date of this government circular?",
+    "ground_truth": "The circular is effective from April 1, 2024.",
+    "contexts": [
+      "This Office Memorandum shall come into force with immediate effect from April 1, 2024, and shall supersede all previous circulars and instructions issued on this subject. All departments are directed to implement these guidelines without delay."
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_017",
+    "language": "en",
+    "query": "What is the revised DA rate mentioned in the circular?",
+    "ground_truth": "The Dearness Allowance has been revised to 50% of Basic Pay with effect from January 1, 2024.",
+    "contexts": [
+      "In pursuance of the Government's decision, the Dearness Allowance (DA) payable to Central Government employees is hereby revised from 46% to 50% of the Basic Pay with effect from January 1, 2024. The arrears for January to March 2024 shall be paid in cash."
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_018",
+    "language": "en",
+    "query": "Which category of employees does this circular apply to?",
+    "ground_truth": "The circular applies to all Central Government employees including those on deputation but excludes railway and defence personnel covered under separate pay commissions.",
+    "contexts": [
+      "These instructions apply to all Central Government civilian employees including those on deputation to state governments, autonomous bodies, and public sector undertakings. These orders do not apply to Railway employees and Armed Forces personnel who are governed by separate pay revision orders."
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_019",
+    "language": "en",
+    "query": "What is the procedure for claiming the revised HRA?",
+    "ground_truth": "Employees must submit a revised HRA claim form to their Drawing and Disbursing Officer within 30 days, supported by rent receipts and landlord PAN for claims above ₹1 lakh per month.",
+    "contexts": [
+      "For claiming the revised House Rent Allowance, employees shall submit the prescribed HRA claim form to their Drawing and Disbursing Officer (DDO) within 30 days of this circular. Rent receipts and PAN of landlord are mandatory where monthly rent exceeds ₹1,00,000."
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_020",
+    "language": "en",
+    "query": "What happens if an employee fails to submit the HRA claim within 30 days?",
+    "ground_truth": "If an employee fails to submit the HRA claim within 30 days, the revised rate will apply prospectively from the date of submission of the claim, not from the effective date of the circular.",
+    "contexts": [
+      "Employees who fail to submit the HRA claim form within the stipulated 30-day period shall not be entitled to arrears. In such cases, the revised HRA shall be paid prospectively from the month following the submission of the claim, without any retrospective benefit."
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_021",
+    "language": "en",
+    "query": "What is the tax demand amount in this income tax notice?",
+    "ground_truth": "The tax demand is ₹3,82,450 including surcharge and education cess for Assessment Year 2023-24.",
+    "contexts": [
+      "This notice is issued under Section 143(1) of the Income Tax Act 1961. The tax demand for Assessment Year 2023-24 is computed as follows: Tax on total income ₹3,50,000, Surcharge ₹17,500, Education Cess ₹14,950. Total demand: ₹3,82,450."
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_022",
+    "language": "en",
+    "query": "What income was disallowed and under which section?",
+    "ground_truth": "Deduction of ₹1,50,000 claimed under Section 80C was disallowed as the supporting documents were not submitted with the return.",
+    "contexts": [
+      "The deduction of ₹1,50,000 claimed under Section 80C of the Income Tax Act 1961 has been disallowed as the taxpayer failed to furnish documentary evidence of the investments made during Assessment Year 2023-24. The deduction has been added back to the total income."
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_023",
+    "language": "en",
+    "query": "Within how many days must the taxpayer respond to this income tax notice?",
+    "ground_truth": "The taxpayer must respond within 15 days from the date of service of this notice.",
+    "contexts": [
+      "The assessee is hereby required to furnish a response to this notice within 15 days from the date of service of this notice through the Income Tax e-Filing portal at www.incometax.gov.in. Failure to respond may result in best judgment assessment."
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_024",
+    "language": "en",
+    "query": "What is the analytical implication of having both GST and income tax notices for the same year?",
+    "ground_truth": "Concurrent GST and income tax scrutiny for the same period suggests a mismatch between declared turnover in GST filings and income reported in ITR, which may trigger further cross-verification by authorities.",
+    "contexts": [
+      "The taxpayer has received notices under Section 73 of the CGST Act and Section 143(1) of the Income Tax Act for the same Financial Year 2022-23. The GST officer has noted a difference of ₹18,00,000 between the GSTR-1 declared turnover and the turnover reported in the Income Tax Return filed for AY 2023-24."
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "analytical"
+  },
+  {
+    "id": "en_025",
+    "language": "en",
+    "query": "What is the appeal procedure if the taxpayer disagrees with this assessment?",
+    "ground_truth": "The taxpayer may file an appeal before the Commissioner of Income Tax (Appeals) within 30 days of receiving the assessment order, accompanied by the prescribed appeal form and filing fee.",
+    "contexts": [
+      "If the assessee is aggrieved by this assessment order, an appeal may be filed before the Commissioner of Income Tax (Appeals) having jurisdiction over the assessee's case. The appeal must be filed within 30 days from the date of service of this order in the prescribed Form No. 35 along with the applicable filing fee."
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_026",
+    "language": "en",
+    "query": "Compare the penalty provisions under GST and Income Tax for the same period of default.",
+    "ground_truth": "Under GST, penalty under Section 73 is 10% of tax or ₹10,000 whichever is higher for non-fraud cases. Under Income Tax Section 271, penalty can be 100-300% of tax evaded for concealment, making income tax penalties more severe.",
+    "contexts": [
+      "Under Section 73 of CGST Act 2017, for non-fraud cases, the penalty shall be 10% of the tax amount or ₹10,000, whichever is higher. Under Section 271(1)(c) of the Income Tax Act 1961, where income concealment is proved, penalty shall not be less than 100% and not more than 300% of the tax sought to be evaded."
+    ],
+    "doc_type": "mixed",
+    "question_type": "comparative"
+  },
+  {
+    "id": "en_027",
+    "language": "en",
+    "query": "What is the GSTIN of the taxpayer mentioned in the notice?",
+    "ground_truth": "The document does not contain information about the GSTIN in the provided context.",
+    "contexts": [
+      "This notice is issued to M/s ABC Traders, having their registered office at 45, Industrial Area, Pune - 411001. The notice relates to tax liability for the period April 2022 to March 2023."
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_028",
+    "language": "en",
+    "query": "What is the grace period for premium payment in this insurance policy?",
+    "ground_truth": "The grace period for premium payment is 30 days for annual policies and 15 days for monthly payment policies.",
+    "contexts": [
+      "Grace Period: A grace period of 30 days from the premium due date is allowed for annual premium payment policies. For policies with monthly premium payment option, the grace period is 15 days. Coverage continues during the grace period subject to the terms and conditions of the policy."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_029",
+    "language": "en",
+    "query": "What are the exclusions for mental health treatment in this policy?",
+    "ground_truth": "Mental health treatment is covered up to ₹50,000 per year, but addiction-related treatments, personality disorders, and self-inflicted injuries are excluded.",
+    "contexts": [
+      "Mental Illness Coverage: Psychiatric and mental health conditions requiring hospitalisation are covered up to ₹50,000 per policy year. Exclusions include: treatment for addiction (alcohol, drugs, tobacco), personality disorders, self-inflicted injuries, and treatment in non-NABH accredited psychiatric institutions."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "en_030",
+    "language": "en",
+    "query": "If the insured has two health policies, how will the claim be settled?",
+    "ground_truth": "In case of multiple policies, the insured must notify all insurers. The primary insurer settles first, and the remaining amount can be claimed from the secondary insurer on a contribution basis.",
+    "contexts": [
+      "Multiple Policy Clause: If the insured has more than one health insurance policy, the insured must disclose all existing policies to this insurer. Claims will be settled on contribution basis. The insured shall first claim from the primary policy, and any balance admissible amount may be claimed from this policy. Insurers will contribute in proportion to their respective sum insured."
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "analytical"
+  },
+  {
+    "id": "hi_001",
+    "language": "hi",
+    "query": "इस जीएसटी नोटिस में कुल कर देनदारी कितनी है?",
+    "ground_truth": "इस जीएसटी नोटिस में कुल कर देनदारी ₹2,45,000 है जिसमें मूल कर ₹2,00,000, ब्याज ₹25,000 और जुर्माना ₹20,000 शामिल है।",
+    "contexts": [
+      "करदाता को सीजीएसटी अधिनियम 2017 की धारा 73 के अंतर्गत ₹2,00,000 का कर, ₹25,000 का ब्याज (18% प्रति वर्ष की दर से) और ₹20,000 का जुर्माना अदा करना होगा। कुल बकाया राशि: ₹2,45,000।"
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_002",
+    "language": "hi",
+    "query": "कारण बताओ नोटिस का जवाब देने की अंतिम तिथि क्या है?",
+    "ground_truth": "करदाता को इस नोटिस की प्राप्ति की तिथि से 30 दिनों के भीतर कारण बताओ नोटिस का जवाब देना होगा।",
+    "contexts": [
+      "आपको इस नोटिस की प्राप्ति की तारीख से 30 दिनों के भीतर कारण बताना होगा कि सीजीएसटी अधिनियम 2017 की धारा 73(9) के तहत आपके विरुद्ध ₹2,00,000 की कर मांग क्यों न की जाए।"
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_003",
+    "language": "hi",
+    "query": "जुर्माना किस धारा के अंतर्गत लगाया गया है?",
+    "ground_truth": "जुर्माना केंद्रीय वस्तु एवं सेवा कर अधिनियम 2017 की धारा 73(9) के अंतर्गत लगाया गया है।",
+    "contexts": [
+      "वित्तीय वर्ष 2022-23 के दौरान वस्तुओं और सेवाओं की आपूर्ति पर देय कर का भुगतान न करने के कारण केंद्रीय वस्तु एवं सेवा कर अधिनियम 2017 की धारा 73(9) के तहत ₹20,000 का जुर्माना लगाया गया है।"
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_004",
+    "language": "hi",
+    "query": "यह जीएसटी नोटिस किस वित्तीय वर्ष से संबंधित है?",
+    "ground_truth": "यह जीएसटी नोटिस वित्तीय वर्ष 2022-23 (अप्रैल 2022 से मार्च 2023) से संबंधित है।",
+    "contexts": [
+      "यह नोटिस अप्रैल 2022 से मार्च 2023 (वित्तीय वर्ष 2022-23) की कर अवधि के संबंध में एकीकृत जीएसटी, केंद्रीय जीएसटी और राज्य जीएसटी के अदेय भुगतान के लिए जारी किया जा रहा है।"
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_005",
+    "language": "hi",
+    "query": "बकाया जीएसटी राशि पर कितनी ब्याज दर लागू की गई है?",
+    "ground_truth": "बकाया जीएसटी राशि पर 18% प्रति वर्ष की ब्याज दर लागू की गई है।",
+    "contexts": [
+      "सीजीएसटी अधिनियम 2017 की धारा 50 के अनुसार ₹2,00,000 की मूल कर राशि पर 18% प्रति वर्ष की दर से ब्याज की गणना की गई है जो ₹25,000 बनती है।"
+    ],
+    "doc_type": "gst_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_006",
+    "language": "hi",
+    "query": "स्वास्थ्य बीमा पॉलिसी में अधिकतम बीमा राशि कितनी है?",
+    "ground_truth": "इस स्वास्थ्य बीमा पॉलिसी में अधिकतम बीमा राशि प्रति पॉलिसी वर्ष ₹10,00,000 (दस लाख रुपये) है।",
+    "contexts": [
+      "इस व्यक्तिगत स्वास्थ्य बीमा पॉलिसी के अंतर्गत प्रति पॉलिसी वर्ष अधिकतम बीमा राशि ₹10,00,000 (रुपये दस लाख मात्र) होगी। यह सीमा अस्पताल में भर्ती होने से पहले और बाद के सभी खर्चों पर लागू होती है।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_007",
+    "language": "hi",
+    "query": "पूर्व-मौजूदा बीमारियों के लिए प्रतीक्षा अवधि कितनी है?",
+    "ground_truth": "पूर्व-मौजूदा बीमारियों के लिए पहली पॉलिसी की शुरुआत की तारीख से 36 महीने की निरंतर कवरेज की प्रतीक्षा अवधि है।",
+    "contexts": [
+      "पॉलिसी जारी करते समय घोषित पूर्व-मौजूदा बीमारियाँ (पीईडी) पहली पॉलिसी की शुरुआत की तारीख से 36 (छत्तीस) महीने की निरंतर कवरेज के बाद कवर की जाएंगी।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_008",
+    "language": "hi",
+    "query": "क्या इस पॉलिसी में प्रसूति कवरेज शामिल है?",
+    "ground_truth": "हाँ, 24 महीने की प्रतीक्षा अवधि के बाद प्रसूति कवरेज शामिल है। सामान्य प्रसव के लिए ₹50,000 और सिजेरियन के लिए ₹75,000 की उप-सीमा है।",
+    "contexts": [
+      "24 महीने की प्रतीक्षा अवधि के बाद सामान्य प्रसव (उप-सीमा ₹50,000) और सिजेरियन प्रसव (उप-सीमा ₹75,000) के खर्च कवर किए जाते हैं। 90 दिनों तक नवजात शिशु की कवरेज प्रसूति उप-सीमा के भीतर शामिल है।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_009",
+    "language": "hi",
+    "query": "इस पॉलिसी में सह-भुगतान का नियम क्या है?",
+    "ground_truth": "60 वर्ष से अधिक आयु के बीमित व्यक्तियों के लिए सभी दावों पर 20% सह-भुगतान लागू होता है। 60 वर्ष से कम आयु के लिए कोई सह-भुगतान नहीं है।",
+    "contexts": [
+      "सह-भुगतान खंड: दावे के समय 60 वर्ष और उससे अधिक आयु के बीमित व्यक्तियों के लिए स्वीकार्य दावा राशि का 20% सह-भुगतान लागू होगा। 60 वर्ष से कम आयु के बीमित व्यक्तियों के लिए कोई सह-भुगतान लागू नहीं है।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_010",
+    "language": "hi",
+    "query": "कैशलेस अस्पताल भर्ती के लिए कौन से दस्तावेज़ चाहिए?",
+    "ground_truth": "कैशलेस अस्पताल भर्ती के लिए स्वास्थ्य कार्ड, सरकारी फोटो पहचान पत्र चाहिए और नियोजित प्रक्रियाओं के लिए 48 घंटे पहले पूर्व-अनुमोदन अनुरोध जमा करना होगा।",
+    "contexts": [
+      "कैशलेस सुविधा का लाभ उठाने के लिए: (1) भर्ती के समय बीमाकर्ता द्वारा जारी स्वास्थ्य कार्ड प्रस्तुत करें, (2) सरकारी फोटो पहचान पत्र दें, (3) नियोजित अस्पताल भर्ती के लिए 48 घंटे पहले या आपातकालीन भर्ती के लिए 24 घंटे के भीतर पूर्व-अनुमोदन अनुरोध जमा करें।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_011",
+    "language": "hi",
+    "query": "इस पट्टा समझौते में लॉक-इन अवधि कितनी है?",
+    "ground_truth": "इस पट्टा समझौते में प्रारंभ तिथि से 36 महीने की लॉक-इन अवधि है।",
+    "contexts": [
+      "पट्टेदार इस पट्टे के प्रारंभ की तारीख से छत्तीस (36) महीने की लॉक-इन अवधि से सहमत होता है। लॉक-इन अवधि के दौरान, कोई भी पक्ष 3 महीने के किराए के बराबर जुर्माना अदा किए बिना इस समझौते को समाप्त नहीं कर सकता।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_012",
+    "language": "hi",
+    "query": "मासिक किराया कितना है और यह कब देय है?",
+    "ground_truth": "मासिक किराया ₹85,000 है और यह प्रत्येक कैलेंडर माह की 5 तारीख तक देय है।",
+    "contexts": [
+      "पट्टेदार प्रत्येक कैलेंडर माह की 5 तारीख को या उससे पहले ₹85,000 (रुपये पचासी हजार मात्र) का मासिक किराया अदा करेगा। 10 तारीख के बाद विलंबित भुगतान पर 2% प्रति माह का विलंब शुल्क लागू होगा।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_013",
+    "language": "hi",
+    "query": "सुरक्षा जमा राशि कितनी है और इसे कब वापस किया जाएगा?",
+    "ground_truth": "सुरक्षा जमा ₹2,55,000 (तीन महीने का किराया) है और पट्टेदार के खाली करने के 30 दिनों के भीतर नुकसान काटकर वापस की जाएगी।",
+    "contexts": [
+      "पट्टेदार ने ₹2,55,000 (तीन महीने के किराए के बराबर) की वापसी योग्य सुरक्षा जमा का भुगतान किया है। पट्टेदार द्वारा परिसर खाली करने के 30 दिनों के भीतर सामान्य टूट-फूट से परे किसी भी बकाया या नुकसान की कटौती के बाद जमा वापस की जाएगी।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_014",
+    "language": "hi",
+    "query": "क्या पट्टेदार परिसर को उपपट्टे पर दे सकता है?",
+    "ground_truth": "पट्टेदार पट्टेदाता की पूर्व लिखित सहमति के बिना परिसर को उपपट्टे पर नहीं दे सकता। अनधिकृत उपपट्टा पट्टे की तत्काल समाप्ति का आधार है।",
+    "contexts": [
+      "पट्टेदार पट्टेदाता की पूर्व लिखित सहमति प्राप्त किए बिना परिसर या उसके किसी भी हिस्से को किसी तीसरे पक्ष को उपपट्टे पर, सौंपे या हस्तांतरित नहीं करेगा। कोई भी अनधिकृत उपपट्टा इस पट्टे की तत्काल समाप्ति का आधार होगा।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_015",
+    "language": "hi",
+    "query": "इस समझौते में मध्यस्थता खंड क्या है?",
+    "ground_truth": "विवादों को मध्यस्थता और सुलह अधिनियम 1996 के तहत दोनों पक्षों द्वारा परस्पर नियुक्त एकल मध्यस्थ के समक्ष मुंबई में निपटाया जाएगा।",
+    "contexts": [
+      "विवाद समाधान: इस समझौते से उत्पन्न किसी भी विवाद को मध्यस्थता और सुलह अधिनियम 1996 के तहत दोनों पक्षों द्वारा परस्पर नियुक्त एकल मध्यस्थ के समक्ष प्रस्तुत किया जाएगा। मध्यस्थता का स्थान और स्थल मुंबई होगा।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_016",
+    "language": "hi",
+    "query": "इस सरकारी परिपत्र की प्रभावी तारीख क्या है?",
+    "ground_truth": "यह परिपत्र 1 अप्रैल 2024 से प्रभावी है।",
+    "contexts": [
+      "यह कार्यालय ज्ञापन 1 अप्रैल 2024 से तत्काल प्रभाव से लागू होगा और इस विषय पर पहले जारी किए गए सभी परिपत्रों और निर्देशों को अधिक्रमित करेगा। सभी विभागों को बिना देरी के इन दिशा-निर्देशों को लागू करने का निर्देश दिया जाता है।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_017",
+    "language": "hi",
+    "query": "इस परिपत्र में संशोधित महंगाई भत्ता (डीए) दर क्या है?",
+    "ground_truth": "महंगाई भत्ता 1 जनवरी 2024 से मूल वेतन का 50% हो गया है।",
+    "contexts": [
+      "सरकार के निर्णय के अनुसरण में, केंद्र सरकार के कर्मचारियों को देय महंगाई भत्ता (डीए) 1 जनवरी 2024 से मूल वेतन के 46% से बढ़ाकर 50% किया जाता है। जनवरी से मार्च 2024 के लिए बकाया राशि नकद में दी जाएगी।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_018",
+    "language": "hi",
+    "query": "यह परिपत्र किस श्रेणी के कर्मचारियों पर लागू होता है?",
+    "ground_truth": "यह परिपत्र सभी केंद्रीय सरकारी नागरिक कर्मचारियों पर लागू होता है, लेकिन रेलवे और सशस्त्र बल कर्मियों पर नहीं।",
+    "contexts": [
+      "ये निर्देश राज्य सरकारों, स्वायत्त निकायों और सार्वजनिक क्षेत्र के उपक्रमों में प्रतिनियुक्ति पर कार्यरत लोगों सहित सभी केंद्रीय सरकारी नागरिक कर्मचारियों पर लागू होते हैं। ये आदेश रेलवे कर्मचारियों और सशस्त्र बल कर्मियों पर लागू नहीं होते।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_019",
+    "language": "hi",
+    "query": "संशोधित एचआरए का दावा करने की प्रक्रिया क्या है?",
+    "ground_truth": "कर्मचारियों को इस परिपत्र के 30 दिनों के भीतर अपने आहरण एवं वितरण अधिकारी को संशोधित एचआरए दावा प्रपत्र जमा करना होगा। ₹1 लाख प्रति माह से अधिक किराए के लिए मकान मालिक का पैन अनिवार्य है।",
+    "contexts": [
+      "संशोधित मकान किराया भत्ता (एचआरए) का दावा करने के लिए, कर्मचारी इस परिपत्र के 30 दिनों के भीतर निर्धारित एचआरए दावा प्रपत्र अपने आहरण एवं वितरण अधिकारी (डीडीओ) को जमा करेंगे। जहाँ मासिक किराया ₹1,00,000 से अधिक है, किराया रसीदें और मकान मालिक का पैन अनिवार्य है।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_020",
+    "language": "hi",
+    "query": "यदि कर्मचारी 30 दिनों में एचआरए दावा नहीं करता तो क्या होगा?",
+    "ground_truth": "यदि कर्मचारी 30 दिनों में दावा नहीं करता, तो संशोधित एचआरए दावा जमा करने के बाद के महीने से भावी रूप से मिलेगा, कोई बकाया नहीं मिलेगा।",
+    "contexts": [
+      "जो कर्मचारी निर्धारित 30 दिन की अवधि के भीतर एचआरए दावा प्रपत्र जमा नहीं करते, वे बकाया राशि के हकदार नहीं होंगे। ऐसे मामलों में, संशोधित एचआरए दावा जमा करने के बाद के महीने से भावी रूप से दिया जाएगा, बिना किसी पूर्वव्यापी लाभ के।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_021",
+    "language": "hi",
+    "query": "इस आयकर नोटिस में कर मांग राशि क्या है?",
+    "ground_truth": "आकलन वर्ष 2023-24 के लिए कुल कर मांग ₹3,82,450 है जिसमें कर ₹3,50,000, अधिभार ₹17,500 और शिक्षा उपकर ₹14,950 शामिल है।",
+    "contexts": [
+      "यह नोटिस आयकर अधिनियम 1961 की धारा 143(1) के तहत जारी किया गया है। आकलन वर्ष 2023-24 के लिए कर मांग इस प्रकार है: कुल आय पर कर ₹3,50,000, अधिभार ₹17,500, शिक्षा उपकर ₹14,950। कुल मांग: ₹3,82,450।"
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_022",
+    "language": "hi",
+    "query": "किस कटौती को अस्वीकार किया गया और किस धारा के तहत?",
+    "ground_truth": "धारा 80सी के तहत दावा की गई ₹1,50,000 की कटौती अस्वीकार की गई क्योंकि करदाता ने सहायक दस्तावेज़ प्रस्तुत नहीं किए।",
+    "contexts": [
+      "आयकर अधिनियम 1961 की धारा 80सी के तहत दावा की गई ₹1,50,000 की कटौती को अस्वीकार किया गया है क्योंकि करदाता ने आकलन वर्ष 2023-24 में किए गए निवेश का दस्तावेजी प्रमाण प्रस्तुत नहीं किया। कटौती को कुल आय में वापस जोड़ा गया है।"
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_023",
+    "language": "hi",
+    "query": "करदाता को इस नोटिस का जवाब कितने दिनों में देना होगा?",
+    "ground_truth": "करदाता को इस नोटिस की सेवा की तारीख से 15 दिनों के भीतर आयकर ई-फाइलिंग पोर्टल के माध्यम से जवाब देना होगा।",
+    "contexts": [
+      "निर्धारिती को इस नोटिस की सेवा की तारीख से 15 दिनों के भीतर www.incometax.gov.in पर आयकर ई-फाइलिंग पोर्टल के माध्यम से इस नोटिस का जवाब देना आवश्यक है। जवाब न देने पर सर्वश्रेष्ठ निर्णय मूल्यांकन हो सकता है।"
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_024",
+    "language": "hi",
+    "query": "यदि करदाता इस आकलन से असहमत है तो अपील कहाँ दायर कर सकता है?",
+    "ground_truth": "करदाता आकलन आदेश की सेवा के 30 दिनों के भीतर निर्धारित प्रपत्र 35 में आयकर आयुक्त (अपील) के समक्ष अपील दायर कर सकता है।",
+    "contexts": [
+      "यदि निर्धारिती इस आकलन आदेश से व्यथित है, तो इस आदेश की सेवा की तारीख से 30 दिनों के भीतर निर्धारित प्रपत्र 35 में लागू फाइलिंग शुल्क के साथ निर्धारिती के मामले पर अधिकार क्षेत्र रखने वाले आयकर आयुक्त (अपील) के समक्ष अपील दायर की जा सकती है।"
+    ],
+    "doc_type": "tax_notice",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_025",
+    "language": "hi",
+    "query": "जीएसटी और आयकर दोनों नोटिस एक साथ आने का क्या मतलब है?",
+    "ground_truth": "जीएसटी रिटर्न में घोषित टर्नओवर और आईटीआर में रिपोर्ट की गई आय के बीच ₹18 लाख का अंतर दर्शाता है कि कर विभाग क्रॉस-वेरिफिकेशन कर रहा है और करदाता को दोनों विवरणियों में स्थिरता सुनिश्चित करनी होगी।",
+    "contexts": [
+      "करदाता को उसी वित्तीय वर्ष 2022-23 के लिए सीजीएसटी अधिनियम की धारा 73 और आयकर अधिनियम की धारा 143(1) दोनों के तहत नोटिस मिले हैं। जीएसटी अधिकारी ने GSTR-1 में घोषित टर्नओवर और AY 2023-24 के लिए दाखिल आयकर रिटर्न में रिपोर्ट टर्नओवर के बीच ₹18,00,000 का अंतर नोट किया है।"
+    ],
+    "doc_type": "mixed",
+    "question_type": "analytical"
+  },
+  {
+    "id": "hi_026",
+    "language": "hi",
+    "query": "इस बीमा पॉलिसी में प्रीमियम भुगतान के लिए छूट अवधि कितनी है?",
+    "ground_truth": "वार्षिक प्रीमियम भुगतान पॉलिसियों के लिए 30 दिन और मासिक प्रीमियम भुगतान पॉलिसियों के लिए 15 दिन की छूट अवधि है।",
+    "contexts": [
+      "छूट अवधि: वार्षिक प्रीमियम भुगतान पॉलिसियों के लिए प्रीमियम देय तारीख से 30 दिन की छूट अवधि दी जाती है। मासिक प्रीमियम भुगतान विकल्प वाली पॉलिसियों के लिए छूट अवधि 15 दिन है। छूट अवधि के दौरान पॉलिसी के नियमों और शर्तों के अधीन कवरेज जारी रहती है।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_027",
+    "language": "hi",
+    "query": "यदि बीमित व्यक्ति के पास दो स्वास्थ्य पॉलिसियाँ हैं तो दावा कैसे निपटाया जाएगा?",
+    "ground_truth": "एकाधिक पॉलिसी होने पर बीमित सभी बीमाकर्ताओं को सूचित करेगा। पहले प्राथमिक पॉलिसी से दावा किया जाएगा और शेष स्वीकार्य राशि इस पॉलिसी से अनुपाती योगदान के आधार पर ली जा सकती है।",
+    "contexts": [
+      "एकाधिक पॉलिसी खंड: यदि बीमित के पास एक से अधिक स्वास्थ्य बीमा पॉलिसी है, तो बीमित इस बीमाकर्ता को सभी मौजूदा पॉलिसियाँ बताएगा। दावे योगदान के आधार पर निपटाए जाएंगे। बीमित पहले प्राथमिक पॉलिसी से दावा करेगा और इस पॉलिसी से शेष स्वीकार्य राशि का दावा किया जा सकता है।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "analytical"
+  },
+  {
+    "id": "hi_028",
+    "language": "hi",
+    "query": "इस पॉलिसी में मानसिक स्वास्थ्य उपचार के लिए क्या बहिष्करण हैं?",
+    "ground_truth": "व्यसन उपचार, व्यक्तित्व विकार, स्वयं द्वारा की गई चोटें और गैर-एनएबीएच मान्यता प्राप्त मनोरोग संस्थानों में उपचार बाहर रखे गए हैं।",
+    "contexts": [
+      "मानसिक बीमारी कवरेज: अस्पताल में भर्ती की आवश्यकता वाली मनोरोग और मानसिक स्वास्थ्य स्थितियाँ प्रति पॉलिसी वर्ष ₹50,000 तक कवर होती हैं। बहिष्करण में शामिल हैं: व्यसन उपचार (शराब, नशीली दवाएं, तंबाकू), व्यक्तित्व विकार, स्वयं द्वारा की गई चोटें और गैर-एनएबीएच मान्यता प्राप्त मनोरोग संस्थानों में उपचार।"
+    ],
+    "doc_type": "insurance_policy",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_029",
+    "language": "hi",
+    "query": "इस पट्टा समझौते में विलंबित किराया भुगतान पर क्या शुल्क लगता है?",
+    "ground_truth": "महीने की 10 तारीख के बाद विलंबित किराया भुगतान पर 2% प्रति माह का विलंब शुल्क लागू होता है।",
+    "contexts": [
+      "पट्टेदार प्रत्येक कैलेंडर माह की 5 तारीख को या उससे पहले ₹85,000 का मासिक किराया अदा करेगा। 10 तारीख के बाद विलंबित भुगतान पर 2% प्रति माह का विलंब शुल्क लागू होगा।"
+    ],
+    "doc_type": "legal_agreement",
+    "question_type": "factual"
+  },
+  {
+    "id": "hi_030",
+    "language": "hi",
+    "query": "केंद्र सरकार के एक ऐसे कर्मचारी पर क्या असर पड़ेगा जो 62 वर्ष का है और किसी राज्य सरकार में प्रतिनियुक्ति पर है?",
+    "ground_truth": "ऐसे कर्मचारी पर यह परिपत्र लागू होगा क्योंकि प्रतिनियुक्त केंद्रीय कर्मचारी कवर हैं। वे 1 जनवरी 2024 से संशोधित 50% डीए के पात्र होंगे।",
+    "contexts": [
+      "ये निर्देश राज्य सरकारों, स्वायत्त निकायों और सार्वजनिक क्षेत्र के उपक्रमों में प्रतिनियुक्ति पर कार्यरत लोगों सहित सभी केंद्रीय सरकारी नागरिक कर्मचारियों पर लागू होते हैं। महंगाई भत्ता 1 जनवरी 2024 से मूल वेतन के 46% से बढ़ाकर 50% किया जाता है।"
+    ],
+    "doc_type": "government_circular",
+    "question_type": "analytical"
+  }
+]

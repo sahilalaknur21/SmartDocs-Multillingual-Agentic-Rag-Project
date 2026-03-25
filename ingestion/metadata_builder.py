@@ -148,5 +148,5 @@ def build_chunk_metadata(
         "doc_hash": doc_hash,
 
         # Timestamps
-        "created_at": datetime.now(timezone.utc).isoformat(),
+        "created_at": datetime.now(timezone.utc),
     }

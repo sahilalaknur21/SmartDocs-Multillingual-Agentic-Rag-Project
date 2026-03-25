@@ -121,8 +121,8 @@ Question: {query}"""
         max_tokens=250,
         temperature=0.3,
     )
-
     raw = response.choices[0].message.content.strip()
+    raw = raw.replace("```json", "").replace("```", "").strip()
 
     try:
         data = json.loads(raw)
@@ -175,6 +175,7 @@ Question: {query}"""
     )
 
     raw = response.choices[0].message.content.strip()
+    raw = raw.replace("```json", "").replace("```", "").strip()
 
     try:
         data = json.loads(raw)
@@ -222,6 +223,7 @@ Original question: {query}"""
     )
 
     raw = response.choices[0].message.content.strip()
+    raw = raw.replace("```json", "").replace("```", "").strip()
 
     try:
         data = json.loads(raw)
