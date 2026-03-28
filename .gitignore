@@ -48,3 +48,9 @@ indic_nlp_resources/
 *.zip
 *.pdf
 .smartdocs_session.json
+
+DejaVuSans.ttf
+*.ttf
+*.pdf
+test_retrieval.py
+write_app.py
