@@ -1,4 +1,4 @@
-"""
+﻿"""
 evaluation/ragas_evaluator.py
 
 WHY THIS EXISTS: Runs RAGAS evaluation separately on English and Hindi test sets.
@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# RAGAS version detection — handles both 0.1.x and 0.2.x APIs
+# RAGAS version detection â€” handles both 0.1.x and 0.2.x APIs
 # ---------------------------------------------------------------------------
 
 def _detect_ragas_api() -> str:
@@ -84,7 +84,7 @@ class LanguageMetrics:
 class EvaluationReport:
     english: LanguageMetrics
     hindi: LanguageMetrics
-    faithfulness_ratio: float          # hindi / english — must be > 0.97
+    faithfulness_ratio: float          # hindi / english â€” must be > 0.97
     hallucination_rate: float          # 1 - faithfulness (approximation)
     overall_passed: bool
     blocking_reasons: list[str]
@@ -110,16 +110,16 @@ class EvaluationReport:
         _print_lang(self.hindi, "HINDI")
         print(f"\n  Faithfulness Ratio (hi/en): {self.faithfulness_ratio:.4f}  (target > 0.97)")
         print(f"  Hallucination Rate:         {self.hallucination_rate:.4f}  (target < 0.05)")
-        status = "✅ PASSED" if self.overall_passed else "🚫 BLOCKED"
+        status = "âœ… PASSED" if self.overall_passed else "ðŸš« BLOCKED"
         print(f"\n  Deployment Gate: {status}")
         if self.blocking_reasons:
             for r in self.blocking_reasons:
-                print(f"    ✗ {r}")
+                print(f"    âœ-- {r}")
         print(sep)
 
 
 def _print_lang(m: LanguageMetrics, label: str) -> None:
-    status = "✅" if m.passed_thresholds else "🚫"
+    status = "âœ…" if m.passed_thresholds else "ðŸš«"
     print(f"\n  {status} {label} ({m.sample_count} samples, {m.evaluation_time_seconds:.1f}s)")
     print(f"    Faithfulness:     {m.faithfulness:.4f}")
     print(f"    Answer Relevancy: {m.answer_relevancy:.4f}")
@@ -160,7 +160,7 @@ def load_test_set(
 
 
 # ---------------------------------------------------------------------------
-# RAGAS evaluation — v1 API (datasets.Dataset)
+# RAGAS evaluation â€” v1 API (datasets.Dataset)
 # ---------------------------------------------------------------------------
 
 def _evaluate_v1(
@@ -206,7 +206,7 @@ def _evaluate_v1(
 
 
 # ---------------------------------------------------------------------------
-# RAGAS evaluation — v2 API (EvaluationDataset)
+# RAGAS evaluation â€” v2 API (EvaluationDataset)
 # ---------------------------------------------------------------------------
 
 def _evaluate_v2(
@@ -249,7 +249,7 @@ def _evaluate_v2(
     scores = result.to_pandas()
     return {
         "faithfulness":      float(scores["faithfulness"].mean()),
-        "answer_relevancy":  float(scores["response_relevancy"].mean()),
+        "answer_relevancy":  float(scores["answer_relevancy"].mean()),
         "context_precision": float(scores["context_precision"].mean()),
         "context_recall":    float(scores["context_recall"].mean()),
     }
@@ -320,7 +320,7 @@ def _build_ragas_llm_and_embeddings() -> tuple[Any, Any]:
         api_key=settings.sarvam_api_key,           # type: ignore[arg-type]
         base_url=settings.sarvam_base_url,
         temperature=0.0,
-        max_tokens=1000,
+        max_tokens=2000,
     )
     ragas_llm = LangchainLLMWrapper(sarvam_chat)
 
@@ -354,7 +354,7 @@ def run_evaluation(
 
     Args:
         test_set_path: Path to golden_test_set.json. Defaults to same directory.
-        generated_answers: Optional dict mapping sample id → generated answer.
+        generated_answers: Optional dict mapping sample id â†’ generated answer.
             If provided, uses these answers instead of ground_truth for evaluation.
             This is how you evaluate real SmartDocs outputs.
         output_path: Optional path to write JSON report. Defaults to
@@ -400,15 +400,15 @@ def run_evaluation(
     blocking_reasons: list[str] = []
     if hi_metrics.faithfulness < 0.85:
         blocking_reasons.append(
-            f"Hindi faithfulness {hi_metrics.faithfulness:.4f} < 0.85 — DEPLOYMENT BLOCKED"
+            f"Hindi faithfulness {hi_metrics.faithfulness:.4f} < 0.85 â€” DEPLOYMENT BLOCKED"
         )
     if faithfulness_ratio < 0.97:
         blocking_reasons.append(
-            f"Hindi/English faithfulness ratio {faithfulness_ratio:.4f} < 0.97 — product not India-first"
+            f"Hindi/English faithfulness ratio {faithfulness_ratio:.4f} < 0.97 â€” product not India-first"
         )
     if hallucination_rate >= 0.05:
         blocking_reasons.append(
-            f"Hallucination rate {hallucination_rate:.4f} >= 0.05 — DEPLOYMENT BLOCKED"
+            f"Hallucination rate {hallucination_rate:.4f} >= 0.05 â€” DEPLOYMENT BLOCKED"
         )
     if not en_metrics.passed_thresholds:
         blocking_reasons.append("English metrics below threshold")
@@ -444,9 +444,10 @@ def run_evaluation(
 if __name__ == "__main__":
     logging.basicConfig(
         level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s — %(message)s",
+        format="%(asctime)s %(levelname)s %(name)s â€” %(message)s",
         stream=sys.stdout,
     )
     report = run_evaluation()
     report.print_summary()
     sys.exit(0 if report.overall_passed else 1)
+
