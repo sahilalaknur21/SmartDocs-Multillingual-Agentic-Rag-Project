@@ -1,0 +1,7 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "smartdocs_agent": "./agents/smartdocs_graph.py:graph"
+  },
+  "env": ".env"
+}

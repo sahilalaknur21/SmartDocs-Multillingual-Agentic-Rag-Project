@@ -159,6 +159,21 @@ async def retrieve_node(state: SmartDocsState) -> dict:
     Uses active_query (may be refined query on retry cycles).
     Dense 0.7 + BM25 0.3 + RRF. top-20 candidates.
     """
+    # ── DEPENDENCY INJECTION FIX FOR LANGGRAPH STUDIO ──
+    # Intercepts manual JSON payloads from the UI to test documents without a database.
+    if state.get("retrieved_chunks"):
+        raw_chunks = state["retrieved_chunks"]
+        if len(raw_chunks) > 0 and isinstance(raw_chunks[0], dict):
+            from retrieval.hybrid_retriever import RetrievedChunk
+            try:
+                # Convert Studio's raw JSON dicts into your strict Python objects
+                object_chunks = [RetrievedChunk(**c) for c in raw_chunks]
+                return {"retrieved_chunks": object_chunks}
+            except Exception as e:
+                logger.warning(f"Mock injection failed kwargs mapping: {e}")
+        return {"retrieved_chunks": raw_chunks}
+    # ───────────────────────────────────────────────────
+
     transformed = state.get("transformed_queries")
     queries = (
         transformed.all_queries
@@ -557,15 +572,6 @@ async def run_query(
     """
     Main entry point for SmartDocs queries.
     Runs the complete graph — returns final state.
-
-    Args:
-        query: User query text
-        user_id: Authenticated user ID
-        doc_id: Optional — restrict retrieval to specific document
-        doc_title: Document title for citations
-
-    Returns:
-        Final state dict with final_answer, cited_sources, cost, latency
     """
     graph = get_smartdocs_graph()
 
@@ -584,7 +590,26 @@ async def run_query(
         "graph_start_time": time.perf_counter(),
     }
 
-    final_state = await graph.ainvoke(initial_state)
+    # ── LANGSMITH TRACING INJECTION ───────────────────────────────────────────
+    trace_data = TraceMetadata(
+        user_id=user_id,
+        language_code="pending",
+        query_type="pending",
+        top_reranker_score=0.0,
+        crag_triggered=False,
+        sarvam_model="sarvam-m",
+        retry_count=0,
+        cache_hit=False,
+        total_cost_inr=0.0
+    )
+    
+    run_config = {
+        "metadata": build_run_metadata(trace_data),
+        "tags": ["smartdocs_v1", f"user:{user_id}"]
+    }
+    # ──────────────────────────────────────────────────────────────────────────
+
+    final_state = await graph.ainvoke(initial_state, config=run_config)
 
     logger.info(
         "SmartDocs query complete",
@@ -610,19 +635,7 @@ async def stream_query(
     doc_title: str = "your document",
 ):
     """
-    Streaming entry point — yields events for FastAPI SSE in Part 5.
-    Uses astream_events v2.
-
-    Event types surfaced:
-        on_chain_start  → graph execution started
-        on_chain_stream → node outputs (sources, tokens, cost)
-        on_chain_end    → complete state
-
-    Args:
-        Same as run_query
-
-    Yields:
-        LangGraph event dicts
+    Streaming entry point — yields events for FastAPI SSE.
     """
     graph = get_smartdocs_graph()
 
@@ -641,5 +654,28 @@ async def stream_query(
         "graph_start_time": time.perf_counter(),
     }
 
-    async for event in graph.astream_events(initial_state, version="v2"):
+    # ── LANGSMITH TRACING INJECTION ───────────────────────────────────────────
+    trace_data = TraceMetadata(
+        user_id=user_id,
+        language_code="pending",
+        query_type="pending",
+        top_reranker_score=0.0,
+        crag_triggered=False,
+        sarvam_model="sarvam-m",
+        retry_count=0,
+        cache_hit=False,
+        total_cost_inr=0.0
+    )
+    
+    run_config = {
+        "metadata": build_run_metadata(trace_data),
+        "tags": ["smartdocs_v1", f"user:{user_id}"]
+    }
+    # ──────────────────────────────────────────────────────────────────────────
+
+    async for event in graph.astream_events(initial_state, version="v2", config=run_config):
         yield event
+        
+# ── LANGGRAPH STUDIO EXPORT ───────────────────────────────────────────────────
+# Expose the compiled graph as a module-level variable for the langgraph-cli.
+graph = get_smartdocs_graph()
