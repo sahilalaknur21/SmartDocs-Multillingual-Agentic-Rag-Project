@@ -39,6 +39,7 @@ dependencies = [
     "unstructured>=0.21.5",
     "langchain-openai>=1.1.11",
     "langchain-huggingface>=1.2.1",
+    "langgraph-cli[inmem]>=0.4.19",
 ]
 
 [build-system]
