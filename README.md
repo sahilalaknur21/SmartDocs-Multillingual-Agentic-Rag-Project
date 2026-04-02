@@ -11,6 +11,10 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 
 ---
 
+<div align="center">
+  <a href="https://smartdocs-website.vercel.app/">
+    <img src="https://img.shields.io/badge/Click_for_Full_Project_Architecture-121819?style=for-the-badge&logo=vercel&logoColor=white&color=0052FF" alt="Click for Full Project Architecture" />
+  </a>
 </div>
 
 > **🚨 Reality Check: The Silent Failure of English-First RAG**
