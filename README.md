@@ -15,7 +15,7 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 
 <div align="center">
   <a href="https://smartdocs-website.vercel.app/">
-    <img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=00c6ff,0072ff&height=80&text=🚀%20Click%20for%20Full%20Project%20Architecture&fontSize=24&fontColor=ffffff&animation=twinkling" alt="Click for Full Project Architecture" width="600"/>
+    <img src="https://capsule-render.vercel.app/api?type=soft&color=gradient&customColorList=12,18,19&height=80&text=🚀%20Click%20for%20Full%20Project%20Architecture&fontSize=24&fontColor=ffffff&animation=twinkling" alt="Click for Full Project Architecture" width="600"/>
   </a>
 </div>
 
