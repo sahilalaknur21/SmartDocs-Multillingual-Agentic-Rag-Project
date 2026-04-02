@@ -235,4 +235,6 @@ This is not a standalone demo; it is an infrastructure foundation. The architect
 
 This architecture is built for practitioners dealing with the messy reality of production multilingual retrieval.
 
-If you identify edge cases in the script-aware chunking boundaries, experience correlation drift in the hybrid fusion weights, or have optimizations for the async query transformation bottlenecks, please submit an issue or a PR with detailed tracing evidence. Serious architectural critiques from engineers operating similar systems are highly welcomed.
+If you identify edge cases in the script-aware chunking boundaries, experience correlation drift in the hybrid fusion weights, or have optimizations for the async query transformation bottlenecks, please submit an issue or a PR with detailed tracing evidence. 
+
+Serious architectural critiques from engineers operating similar systems are highly welcomed.
