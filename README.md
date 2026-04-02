@@ -11,6 +11,10 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 
 ---
 
+> **🚨 Reality Check: The Silent Failure of English-First RAG**
+
+>Naive RAG systems often fail in Indian production. Adding translation on top of an English pipeline leads to loss of meaning—especially in GST rules, legal details, and exact numbers. A system that gives 90% accuracy in English but only 65% in Hindi isn’t truly multilingual. Cross-language accuracy and proper handling of Hindi text must be built in, and deployment should stop if translation accuracy drops below 0.97.
+
 <br>
 
 <div align="center">
@@ -20,10 +24,6 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 </div>
 
 <br>
-
-> **🚨 Reality Check: The Silent Failure of English-First RAG**
-
->Naive RAG systems often fail in Indian production. Adding translation on top of an English pipeline leads to loss of meaning—especially in GST rules, legal details, and exact numbers. A system that gives 90% accuracy in English but only 65% in Hindi isn’t truly multilingual. Cross-language accuracy and proper handling of Hindi text must be built in, and deployment should stop if translation accuracy drops below 0.97.
 
 ## 🎯 What This System Solves
 
