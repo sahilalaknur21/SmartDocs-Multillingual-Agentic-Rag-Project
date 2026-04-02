@@ -1,6 +1,9 @@
 <div align="center">
 
-# SmartDocs: India-First Agentic RAG
+<!-- HERO HEADER -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,18,19&height=200&section=header&text=%20SmartDocs:%20India-First%20Agentic-Rag&fontSize=50&fontColor=fff&animation=fadeIn&fontAlignY=38&desc=Research-Grade%20EDA%20Pipeline%20With%20Production&descSize=18&descAlignY=55" width="100%"/>
+
+</div>
 
 **Multilingual, Zero-Translation Retrieval Architecture for High-Compliance Domains**
 
@@ -11,7 +14,8 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 </div>
 
 > **🚨 Reality Check: The Silent Failure of English-First RAG**
-> Naive RAG pipelines fail silently in Indian production environments. Bolting a translation layer onto an English-optimized pipeline destroys domain-specific semantics—GST clauses, legal nuances, and exact numerical thresholds are lost in translation. A system boasting 90% accuracy in English while quietly delivering 65% accuracy in Hindi is not multilingual; it is an English system with support theater. This architecture treats cross-lingual alignment and Devanagari Unicode processing as foundational, blocking deployment if the Hindi-to-English faithfulness ratio drops below 0.97.
+
+>Naive RAG systems often fail in Indian production. Adding translation on top of an English pipeline leads to loss of meaning—especially in GST rules, legal details, and exact numbers. A system that gives 90% accuracy in English but only 65% in Hindi isn’t truly multilingual. Cross-language accuracy and proper handling of Hindi text must be built in, and deployment should stop if translation accuracy drops below 0.97.
 
 ## 🎯 What This System Solves
 
