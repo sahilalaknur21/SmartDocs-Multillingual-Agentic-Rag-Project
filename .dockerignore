@@ -1,0 +1,76 @@
+# Never ship secrets
+.env
+.env.local
+.env.*.local
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Development tools
+.git/
+.gitignore
+.github/
+.pre-commit-config.yaml
+.secrets.baseline
+
+# Test files
+tests/
+evaluation/evaluation_report.json
+evaluation/gate_result.json
+pytest_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Large binary files
+*.pdf
+*.ttf
+*.zip
+*.tar.gz
+DejaVuSans.ttf
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temp files
+test_doc.pdf
+test_v3.pdf
+test_fresh.pdf
+gst_hindi.pdf
+gst_hindi_unicode.pdf
+test_retrieval.py
+write_app.py
+
+# Cache
+.cache/
+*.cache
+
+# Node (if any)
+node_modules/
+
+# Railway
+railway.toml

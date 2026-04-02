@@ -1,0 +1,44 @@
+# ── Streamlit UI Service ───────────────────────────────────────────────────────
+FROM python:3.13-slim-bookworm AS streamlit
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=ghcr.io/astral-sh/uv:0.5.17 /uv /usr/local/bin/
+
+RUN useradd -m -u 1000 -s /bin/bash appuser
+
+WORKDIR /app
+
+# Only install what Streamlit UI needs — no ML deps, no embedders
+RUN uv venv .venv && \
+    uv pip install --python .venv/bin/python \
+        streamlit httpx pydantic pydantic-settings \
+        python-dotenv pyyaml
+
+# Copy only UI source files — not the entire backend
+COPY --chown=appuser:appuser ui/ ./ui/
+COPY --chown=appuser:appuser config/ ./config/
+COPY --chown=appuser:appuser .env.example ./.env.example
+
+ENV PATH="/app/.venv/bin:$PATH" \
+    PYTHONPATH="/app" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PORT=8501
+
+RUN mkdir -p /app/.streamlit && chown -R appuser:appuser /app
+
+# Streamlit config — disable telemetry, set theme
+RUN echo '[general]\nemail = ""\n[browser]\ngatherUsageStats = false\n[server]\nheadless = true\nenableCORS = false\nenableXsrfProtection = false' \
+    > /app/.streamlit/config.toml
+
+USER appuser
+
+EXPOSE 8501
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')" || exit 1
+
+CMD ["sh", "-c", "streamlit run ui/app.py --server.port ${PORT} --server.address 0.0.0.0"]

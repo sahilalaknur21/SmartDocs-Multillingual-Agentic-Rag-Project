@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import streamlit as st
 
 st.set_page_config(
@@ -14,7 +15,9 @@ from ui.components.query_panel import render_query_panel
 from ui.components.answer_panel import stream_and_render_answer, render_previous_answer
 from ui.components.cost_panel import render_cost_panel
 
-API_BASE = "http://localhost:8000"
+# Production: reads from SMARTDOCS_API_URL env var (set in Railway)
+# Development: falls back to localhost:8000
+API_BASE = os.getenv("SMARTDOCS_API_URL", "http://localhost:8000").rstrip("/")
 DEFAULT_USER_ID = "dev_user_001"
 
 
@@ -42,13 +45,11 @@ def _init_session_state() -> None:
 
 _init_session_state()
 
-# ── Reset button ───────────────────────────────────────────────────────────────
 if st.sidebar.button("Reset Session", use_container_width=True):
     for key in list(st.session_state.keys()):
         del st.session_state[key]
     st.rerun()
 
-# ── Header ─────────────────────────────────────────────────────────────────────
 st.markdown(
     """
     <div style="
@@ -68,7 +69,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
     with st.expander("User Identity", expanded=False):
         uid_input = st.text_input(
@@ -87,32 +87,27 @@ user_id = st.session_state.user_id
 render_upload_panel(api_base=API_BASE, user_id=user_id)
 render_cost_panel()
 
-# ── Main area ──────────────────────────────────────────────────────────────────
 if not st.session_state.get("doc_id"):
     st.markdown("---")
     c1, c2, c3 = st.columns(3)
     with c1:
         st.markdown(
             "### 1 Upload\n\n"
-            "Upload any PDF — GST notices, legal agreements, "
-            "insurance policies, government circulars."
+            "Upload any PDF in any Indian language."
         )
     with c2:
         st.markdown(
             "### 2 Detect\n\n"
-            "SmartDocs detects the document language automatically. "
-            "Hindi, Tamil, Telugu — no setup needed."
+            "Language detected automatically. Hindi, Tamil, Telugu."
         )
     with c3:
         st.markdown(
             "### 3 Ask\n\n"
-            "Ask questions in your language. "
-            "Get answers in your language. Citations included."
+            "Ask in your language. Get answers in your language."
         )
     st.info("Upload a PDF in the sidebar to get started.")
     st.stop()
 
-# Document is loaded
 doc_title = st.session_state.get("doc_title", "your document")
 st.markdown(f"**Document:** {doc_title}")
 st.markdown("---")
