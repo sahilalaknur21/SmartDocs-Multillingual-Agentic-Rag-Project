@@ -38,6 +38,15 @@ The pipeline is non-linear and stateful.
 5. **Validation & Guardrails:** Post-generation evaluation of faithfulness and language match. Triggers cyclic retries (max 2) before cascading to terminal guardrails (PII redaction, injection detection).
 
 ---
+<br>
+
+<div align="center">
+  <a href="https://smartdocs-website.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀_Click_For_Full_Project_Architecture-2EA043?style=for-the-badge&logo=vercel&logoColor=white&labelColor=238636" height="70" alt="Click for Full Project Architecture"/>
+  </a>
+</div>
+
+<br>
 
 ## 🏗️ System Architecture
 
