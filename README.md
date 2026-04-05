@@ -10,6 +10,15 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 
 ---
 
+<br>
+
+<div align="center">
+  <a href="https://huggingface.co/spaces/Sahilalaknur/smartdocs-ui" target="_blank">
+    <img src="https://img.shields.io/badge/Deployed_Go_Live-0077B6?style=for-the-badge&logo=huggingface&logoColor=FFD21E&labelColor=000000" height="55" alt="Deployed Go Live on Hugging Face"/>
+  </a>
+</div>
+
+<br>
 
 
 > **🚨 Reality Check: The Silent Failure of English-First RAG**
