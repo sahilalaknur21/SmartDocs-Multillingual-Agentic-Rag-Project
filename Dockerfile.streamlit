@@ -1,5 +1,5 @@
-# ── Streamlit UI Service ───────────────────────────────────────────────────────
-FROM python:3.13-slim-bookworm AS streamlit
+# ── SmartDocs Streamlit UI — Hugging Face Spaces Docker ───────────────────────
+FROM python:3.13-slim-bookworm
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
@@ -7,38 +7,37 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=ghcr.io/astral-sh/uv:0.5.17 /uv /usr/local/bin/
 
+# HF Spaces requires user 1000
 RUN useradd -m -u 1000 -s /bin/bash appuser
 
 WORKDIR /app
 
-# Only install what Streamlit UI needs — no ML deps, no embedders
+# Lightweight UI deps only — no torch, no ML libraries
 RUN uv venv .venv && \
     uv pip install --python .venv/bin/python \
-        streamlit httpx pydantic pydantic-settings \
+        streamlit httpx pydantic "pydantic-settings" \
         python-dotenv pyyaml
 
-# Copy only UI source files — not the entire backend
+# Copy only UI and config — not the entire backend
 COPY --chown=appuser:appuser ui/ ./ui/
 COPY --chown=appuser:appuser config/ ./config/
-COPY --chown=appuser:appuser .env.example ./.env.example
 
 ENV PATH="/app/.venv/bin:$PATH" \
     PYTHONPATH="/app" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8501
+    PORT=7860
 
-RUN mkdir -p /app/.streamlit && chown -R appuser:appuser /app
-
-# Streamlit config — disable telemetry, set theme
-RUN echo '[general]\nemail = ""\n[browser]\ngatherUsageStats = false\n[server]\nheadless = true\nenableCORS = false\nenableXsrfProtection = false' \
-    > /app/.streamlit/config.toml
+RUN mkdir -p /app/.streamlit && \
+    printf '[general]\nemail = ""\n[browser]\ngatherUsageStats = false\n[server]\nheadless = true\nenableCORS = false\nenableXsrfProtection = false\n' \
+    > /app/.streamlit/config.toml && \
+    chown -R appuser:appuser /app
 
 USER appuser
 
-EXPOSE 8501
+EXPOSE 7860
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')" || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:7860/_stcore/health')" || exit 1
 
-CMD ["sh", "-c", "streamlit run ui/app.py --server.port ${PORT} --server.address 0.0.0.0"]
+CMD ["streamlit", "run", "ui/app.py", "--server.port", "7860", "--server.address", "0.0.0.0"]

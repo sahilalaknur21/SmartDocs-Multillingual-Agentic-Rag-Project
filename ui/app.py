@@ -15,10 +15,10 @@ from ui.components.query_panel import render_query_panel
 from ui.components.answer_panel import stream_and_render_answer, render_previous_answer
 from ui.components.cost_panel import render_cost_panel
 
-# Production: reads from SMARTDOCS_API_URL env var (set in Railway)
-# Development: falls back to localhost:8000
-API_BASE = os.getenv("SMARTDOCS_API_URL", "http://localhost:8000").rstrip("/")
-DEFAULT_USER_ID = "dev_user_001"
+# Reads SMARTDOCS_API_URL from HF Space secrets — set in Space settings
+# Locally falls back to localhost for development
+API_BASE = os.getenv("SMARTDOCS_API_URL", "http://localhost:7860").rstrip("/")
+DEFAULT_USER_ID = "demo_user"
 
 
 def _init_session_state() -> None:
@@ -45,6 +45,7 @@ def _init_session_state() -> None:
 
 _init_session_state()
 
+# Sidebar
 if st.sidebar.button("Reset Session", use_container_width=True):
     for key in list(st.session_state.keys()):
         del st.session_state[key]
@@ -61,8 +62,9 @@ st.markdown(
     ">
         <h1 style="margin:0; font-size:1.8em;">SmartDocs</h1>
         <p style="margin:6px 0 0 0; opacity:0.9; font-size:0.95em;">
-            Multilingual PDF Q&A for Indian professionals.
+            Multilingual PDF Q&amp;A for Indian professionals.
             22 languages. No translation layer.
+            Powered by Sarvam-30B.
         </p>
     </div>
     """,
@@ -74,7 +76,7 @@ with st.sidebar:
         uid_input = st.text_input(
             "User ID",
             value=st.session_state.user_id,
-            help="In production this comes from your auth system",
+            help="Each user sees only their own documents",
         )
         if uid_input != st.session_state.user_id:
             st.session_state.user_id = uid_input
@@ -83,7 +85,6 @@ with st.sidebar:
             st.rerun()
 
 user_id = st.session_state.user_id
-
 render_upload_panel(api_base=API_BASE, user_id=user_id)
 render_cost_panel()
 
@@ -91,20 +92,11 @@ if not st.session_state.get("doc_id"):
     st.markdown("---")
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.markdown(
-            "### 1 Upload\n\n"
-            "Upload any PDF in any Indian language."
-        )
+        st.markdown("### 1 Upload\n\nAny PDF in any Indian language.")
     with c2:
-        st.markdown(
-            "### 2 Detect\n\n"
-            "Language detected automatically. Hindi, Tamil, Telugu."
-        )
+        st.markdown("### 2 Detect\n\nLanguage detected automatically.")
     with c3:
-        st.markdown(
-            "### 3 Ask\n\n"
-            "Ask in your language. Get answers in your language."
-        )
+        st.markdown("### 3 Ask\n\nQuery and answer in your language.")
     st.info("Upload a PDF in the sidebar to get started.")
     st.stop()
 
