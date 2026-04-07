@@ -153,18 +153,349 @@ Deployment is gated by strict RAGAS validation. Aggregate accuracy hiding Hindi 
 
 ## 🚀 Quick Start
 
-Initialize the strictly typed environment utilizing `uv` for ultra-fast dependency resolution.
+Get SmartDocs running locally in under 10 minutes.
+
+---
+
+### 1. Prerequisites
+
+| Requirement | Version | Notes |
+|---|---|---|
+| Python | 3.12+ | 3.12 or 3.13 both work |
+| uv | latest | `pip install uv` |
+| CUDA | 12.1+ | Optional — falls back to CPU automatically |
+| Supabase account | — | Free tier works |
+| Sarvam AI API key | — | [dashboard.sarvam.ai](https://dashboard.sarvam.ai) |
+| LangSmith API key | — | [smith.langchain.com](https://smith.langchain.com) |
+
+---
+
+### 2. Clone & Environment Setup
 
 ```bash
-# 1. Initialize environment
+git clone https://github.com/YOUR_USERNAME/SmartDocs-Multillingual-Agentic-Rag-Project.git
+cd SmartDocs-Multillingual-Agentic-Rag-Project
+
+# Create virtual environment
 uv venv
+
+# Activate (Windows PowerShell)
+.venv\Scripts\Activate.ps1
+
+# Activate (macOS / Linux)
+source .venv/bin/activate
+```
+
+---
+
+### 3. Install Dependencies
+
+```bash
+# Install all dependencies from pyproject.toml
+uv pip install -e .
+
+# Install PyTorch with CUDA 12.1 support (RTX GPU users)
+uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Verify CUDA (falls back to CPU automatically if not available)
+uv run python -c "import torch; print('CUDA:', torch.cuda.is_available())"
+```
+
+---
+
+### 4. Download Indic NLP Resources
+
+Required for Hindi/Indic sentence tokenization. Without this, chunking fails on Devanagari PDFs.
+
+```bash
+git clone --depth 1 https://github.com/anoopkunchukuttan/indic_nlp_resources.git
+```
+
+This creates `indic_nlp_resources/` in your project root. The `.gitignore` already excludes it.
+
+---
+
+### 5. Download & Validate Embedding Model
+
+SmartDocs uses `intfloat/multilingual-e5-large` locally — zero API cost.
+
+```bash
+# Pre-download the model (~560 MB)
+uv run python -c "
+from sentence_transformers import SentenceTransformer
+model = SentenceTransformer('intfloat/multilingual-e5-large')
+print('Model downloaded and cached')
+print('Embedding dimension:', model.get_sentence_embedding_dimension())
+"
+```
+
+Expected:
+```
+Model downloaded and cached
+Embedding dimension: 1024
+```
+
+**Mandatory validation — do not skip:**
+
+```bash
+uv run python -c "
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+model = SentenceTransformer('intfloat/multilingual-e5-large')
+hindi   = model.encode(['passage: भूमि अधिग्रहण मुआवजा'])
+english = model.encode(['passage: land acquisition compensation'])
+sim = cosine_similarity(hindi, english)[0][0]
+print(f'Cross-language similarity: {sim:.4f}')
+assert sim > 0.85, f'FAILED: {sim} — do not proceed'
+print('PASSED — multilingual retrieval confirmed')
+"
+```
+
+Expected:
+```
+Cross-language similarity: 0.9XXX
+PASSED — multilingual retrieval confirmed
+```
+
+> ⚠️ If similarity < 0.85, stop. The entire retrieval pipeline is compromised.
+
+---
+
+### 6. Configure Environment Variables
+
+```bash
+# Windows
+Copy-Item .env.example .env
+
+# macOS / Linux
+cp .env.example .env
+```
+
+Open `.env` and fill in your credentials:
+
+```env
+# ── Sarvam AI (Generation) ──────────────────────────────────────────
+SARVAM_API_KEY=your_sarvam_api_key_here
+SARVAM_BASE_URL=https://api.sarvam.ai/v1
+SARVAM_MODEL_30B=sarvam-m
+SARVAM_COST_PER_1K_INPUT_TOKENS_INR=0.50
+SARVAM_COST_PER_1K_OUTPUT_TOKENS_INR=0.66
+
+# ── Supabase (Vector Store) ─────────────────────────────────────────
+# Get from: supabase.com → project → Settings → API
+SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
+SUPABASE_SERVICE_KEY=your_service_role_key_here
+
+# Get from: supabase.com → project → Settings → Database → Connection Pooling
+# Use Transaction Pooler URL (port 6543) — NOT direct connection (port 5432)
+DATABASE_URL=postgresql://postgres.YOUR_PROJECT_REF:YOUR_PASSWORD@aws-X-REGION.pooler.supabase.com:6543/postgres
+
+# ── LangSmith (Observability) ───────────────────────────────────────
+# Get from: smith.langchain.com → Settings → API Keys
+LANGSMITH_API_KEY=your_langsmith_api_key_here
+LANGSMITH_PROJECT=smartdocs
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_api_key_here
+LANGCHAIN_PROJECT=smartdocs
+
+# ── Optional Services ────────────────────────────────────────────────
+TAVILY_API_KEY=your_tavily_key_here        # CRAG web search fallback
+REDIS_URL=redis://localhost:6379            # Semantic query cache
+
+# ── App ──────────────────────────────────────────────────────────────
+APP_SECRET_KEY=run_this_to_generate: python -c "import secrets; print(secrets.token_hex(32))"
+ENVIRONMENT=development
+EMBEDDING_DEVICE=cuda                       # Use cpu if no NVIDIA GPU
+EMBEDDING_BATCH_SIZE=32                     # Reduce to 8 if VRAM < 4GB
+HF_TOKEN=                                   # Optional — speeds up model downloads
+```
+
+> 💡 **`SARVAM_BASE_URL` must end with `/v1`** — `https://api.sarvam.ai/v1` not `https://api.sarvam.ai`.
+
+> 💡 **Supabase region matters.** Your `DATABASE_URL` hostname must match your project region (e.g. `aws-0-ap-south-1` for Mumbai). Get the exact URL from Supabase dashboard → Settings → Database → Connection Pooling.
+
+---
+
+### 7. Set Up Supabase Database Schema
+
+**Step 7A — Run the base schema:**
+
+Open [Supabase SQL Editor](https://supabase.com) → your project → SQL Editor → paste the contents of `vectorstore/schema.sql` → click **Run**.
+
+Expected: `Success. No rows returned.`
+
+**Step 7B — Run the schema patch (mandatory):**
+
+In the same SQL Editor, paste the contents of `vectorstore/schema_patch.sql` → click **Run**.
+
+> ⚠️ Without `schema_patch.sql`, the UPDATE RLS policy is missing. `total_chunks` will stay 0 after every ingestion — documents appear uploaded but are silently broken.
+
+**Step 7C — Verify tables exist:**
+
+```bash
+uv run python -c "
+import asyncio, asyncpg
+
+async def check():
+    from config.settings import get_settings
+    s = get_settings()
+    conn = await asyncpg.connect(s.database_url, statement_cache_size=0, ssl='require')
+    tables = await conn.fetch(\"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'\")
+    print('Connection: OK')
+    print('Tables:', [t['table_name'] for t in tables])
+    await conn.close()
+
+asyncio.run(check())
+"
+```
+
+Expected:
+```
+Connection: OK
+Tables: ['documents', 'document_chunks']
+```
+
+---
+
+### 8. Start Redis (Semantic Query Cache)
+
+```bash
+# Windows — using Docker
+docker run -d -p 6379:6379 redis:alpine
+
+# macOS
+brew install redis && brew services start redis
+
+# Linux
+sudo apt install redis-server && sudo systemctl start redis
+
+# Verify
+redis-cli ping
+# Expected: PONG
+```
+
+> Redis is optional. If not running, SmartDocs degrades gracefully — queries still work, semantic cache is disabled.
+
+---
+
+### 9. Start the FastAPI Backend
+
+```bash
+uv run uvicorn api.main:app --reload --host 0.0.0.0 --port 8000 --log-level info
+```
+
+Expected startup output:
+```
+SmartDocs API starting up...
+✓ pgvector pool connected
+✓ DenseEmbedder warmed up on cuda
+✓ LangGraph compiled
+SmartDocs API ready | env=development | model=sarvam-m
+INFO: Uvicorn running on http://0.0.0.0:8000
+```
+
+Verify all components healthy:
+
+```bash
+# Windows PowerShell
+curl.exe http://localhost:8000/health/ping
+curl.exe http://localhost:8000/health
+
+# macOS / Linux
+curl http://localhost:8000/health/ping
+curl http://localhost:8000/health
+```
+
+Expected `/health/ping`:
+```json
+{"status": "alive"}
+```
+
+Expected `/health`:
+```json
+{
+  "status": "ok",
+  "checks": {
+    "db":        {"status": "ok",      "detail": "query returned 1"},
+    "redis":     {"status": "ok",      "detail": "PING → True"},
+    "embedding": {"status": "ok",      "detail": "model loaded on cuda"},
+    "graph":     {"status": "ok",      "detail": "graph compiled: CompiledStateGraph"}
+  },
+  "latency_ms": 812.4
+}
+```
+
+> `redis` shows `degraded` if Redis is not running — this is acceptable. All other checks must be `ok`.
+
+---
+
+### 10. Start the Streamlit UI
+
+Open a **second terminal**:
+
+```bash
+cd SmartDocs-Multillingual-Agentic-Rag-Project
+
+# Windows
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
 source .venv/bin/activate
 
-# 2. Install dependencies (requires langgraph-cli)
-uv add langsmith langchain-core "langgraph-cli[inmem]"
+uv run streamlit run ui/app.py --server.port 8501
+```
 
-# 3. Start LangGraph Studio backend
-uv run langgraph dev
+Open **http://localhost:8501** in your browser.
+
+---
+
+### 11. First Query — End-to-End Test
+
+1. **Upload a PDF** — click Browse files in the sidebar
+2. **Watch the language badge** — a Hindi PDF shows `🇮🇳 Hindi` before you type anything (LAW 17)
+3. **Ask in Hindi:**
+   ```
+   इस दस्तावेज़ का मुख्य विषय क्या है?
+   ```
+4. **Ask in English:**
+   ```
+   What is the main topic of this document?
+   ```
+
+Both answers appear in their respective languages with source citations and cost tracking in INR.
+
+---
+
+### 12. Smoke Test — Full Pipeline Validation
+
+```bash
+uv run python smoke_test.py --api http://localhost:8000 --user user_123
+```
+
+Expected:
+```
+================================================================
+SMARTDOCS POST-DEPLOY SMOKE TEST
+================================================================
+[health] PING OK: {"status": "alive"}
+[health] Status: ok
+
+[hi_01] Basic Hindi GST question
+  Status:   PASS
+  Language: OK
+  Latency:  8200ms
+
+...
+
+SMOKE TEST SUMMARY
+  Passed:           5/5
+  Hindi accuracy:   100%
+  English accuracy: 100%
+
+  SMOKE TEST PASSED — language_accuracy = 1.0
+================================================================
+```
 ```
 
 ---
