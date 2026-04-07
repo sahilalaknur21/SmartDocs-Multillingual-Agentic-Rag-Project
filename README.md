@@ -4,7 +4,7 @@
 
 </div>
 
-**Multilingual, Zero-Translation Retrieval Architecture for High-Compliance Domains**
+**"I achieved 0.9069 cross-language Hindi/English cosine similarity"**
 
 An agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
 
