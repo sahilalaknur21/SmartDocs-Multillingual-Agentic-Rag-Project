@@ -6,7 +6,7 @@
 
 **Multilingual, Zero-Translation Retrieval Architecture for High-Compliance Domains**
 
-An agentic retrieval-augmented generation system engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
+An agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
 
 ---
 
@@ -23,7 +23,7 @@ An agentic retrieval-augmented generation system engineered for India's linguist
 
 > **🚨 Reality Check: The Silent Failure of English-First RAG**
 
-> Naive RAG pipelines fail silently in Indian production environments. Bolting a translation layer onto an English-optimized pipeline destroys domain-specific semantics—GST clauses, legal nuances, and exact numerical thresholds are lost in translation. A system boasting 90% accuracy in English while quietly delivering 65% accuracy in Hindi is not multilingual; it is an English system with support theater. This architecture treats cross-lingual alignment and Devanagari Unicode processing as foundational, blocking deployment if the Hindi-to-English faithfulness ratio drops below 0.97.
+> Naive RAG pipelines fail silently in Indian production environments. Introducing a translation layer into an English-centric system degrades semantic fidelity—GST provisions, legal constraints, and precise numerical thresholds are systematically distorted. A system reporting 90% accuracy in English but 65% in Hindi is not multilingual; it is an English pipeline with superficial language coverage. In this architecture, cross-lingual alignment and robust Devanagari Unicode handling are treated as first-order requirements, with deployment gated if the Hindi-to-English faithfulness ratio drops below 0.97.
 
 ## 🎯 What This System Solves
 
@@ -36,7 +36,7 @@ Standard RAG architectures break down on real-world Indian data. This system exp
 
 ---
 
-## 🧠 System Overview (Mental Model)
+## 🌀 System Overview
 
 The pipeline is non-linear and stateful.
 
