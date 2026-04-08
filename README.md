@@ -109,7 +109,7 @@ The pipeline is non-linear and stateful.
 ## 🏗️ System Architecture
 
 <p align="center">
-<img src="assets/architecture.png" width="900"/>
+<img src="assets/architecture1.png" width="900"/>
 </p>
 
 ### Core Components
