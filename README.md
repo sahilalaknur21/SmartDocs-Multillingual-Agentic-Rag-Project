@@ -13,7 +13,7 @@
 
 ---
 
-An agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
+It is Multillingual Agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
 
 ---
 
