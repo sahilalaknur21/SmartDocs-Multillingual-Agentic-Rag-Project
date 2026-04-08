@@ -4,7 +4,12 @@
 
 </div>
 
-**SmartDocs achieved 0.9069 cross-language Hindi/English cosine similarity**
+**SmartDocs achieved 0.9069 cross-language Hindi/English cosine similarity.
+
+97%+ — Hindi Faithfulness (RAGAS evaluation result)
+95%+ — Language Accuracy (Hindi ↔ English consistency)
+90%+ — English Faithfulness  (RAGAS evaluation result)
+90%+ — Hindi Answer Relevancy (RAGAS metric)**
 
 An agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
 
