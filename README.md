@@ -85,6 +85,8 @@ They reflect actual system performance — not targets or assumed benchmarks.
 - **<5%** — Hallucination Rate *(Custom evaluation metric)*  
   - Low rate of unsupported or fabricated responses
 
+---
+
 ## 🌀 System Overview
 
 The pipeline is non-linear and stateful.
