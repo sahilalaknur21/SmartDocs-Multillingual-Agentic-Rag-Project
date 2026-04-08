@@ -57,7 +57,7 @@ They reflect actual system performance — not targets or assumed benchmarks.
 - **90%+** — English Faithfulness *(RAGAS evaluation result)*  
 - **90%+** — Hindi Answer Relevancy *(RAGAS metric)*  
 
----
+
 
 ## Cross-Lingual Reliability
 
@@ -65,20 +65,20 @@ They reflect actual system performance — not targets or assumed benchmarks.
   - Indicates near parity between Hindi and English performance  
   - No significant degradation in Hindi responses
 
----
+
 
 ## System Performance
 
 - **<12000ms** — P95 Retrieval Latency *(Hybrid + RTX GPU pipeline)*  
 
----
+
 
 ## Retrieval & Grounding Quality
 
 - **98%+** — Context Precision *(RAGAS precision)*  
   - High-quality document retrieval with minimal noise
 
----
+
 
 ## Risk & Stability
 
