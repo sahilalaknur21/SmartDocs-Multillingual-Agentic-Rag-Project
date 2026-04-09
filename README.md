@@ -4,7 +4,7 @@
 
 </div>
 
-**SmartDocs achieved 0.9069 cross-language Hindi/English cosine similarity.**
+**SmartDocs achieved 97%+ — Hindi Faithfulness (RAGAS evaluation result) 0.9069 cross-language Hindi/English cosine similarity.**
 
 - **97%+** — Hindi Faithfulness *(RAGAS evaluation result)*  
 - **95%+** — Language Accuracy *(Hindi ↔ English consistency)*  
