@@ -4,16 +4,13 @@
 
 </div>
 
-**SmartDocs achieved 97%+ — Hindi Faithfulness (RAGAS evaluation result) 0.9069 cross-language Hindi/English cosine similarity.**
-
-- **97%+** — Hindi Faithfulness *(RAGAS evaluation result)*  
-- **95%+** — Language Accuracy *(Hindi ↔ English consistency)*  
-- **90%+** — English Faithfulness *(RAGAS evaluation result)*  
-- **90%+** — Hindi Answer Relevancy *(RAGAS metric)*  
+**SmartDocs achieved 97%+ — Hindi Faithfulness (RAGAS evaluation result) 0.9069 cross-language Hindi/English cosine similarity.It is Multillingual Agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.**
 
 ---
 
-It is Multillingual Agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.
+> **🚨 Reality Check: The Silent Failure of English-First RAG**
+
+> Naive RAG pipelines fail silently in Indian production environments. Introducing a translation layer into an English-centric system degrades semantic fidelity—GST provisions, legal constraints, and precise numerical thresholds are systematically distorted. A system reporting 90% accuracy in English but 65% in Hindi is not multilingual; it is an English pipeline with superficial language coverage. In this architecture, cross-lingual alignment and robust Devanagari Unicode handling are treated as first-order requirements, with deployment gated if the Hindi-to-English faithfulness ratio drops below 0.97.
 
 ---
 
@@ -26,11 +23,6 @@ It is Multillingual Agentic RAG engineered for India's linguistic reality, proce
 </div>
 
 <br>
-
-
-> **🚨 Reality Check: The Silent Failure of English-First RAG**
-
-> Naive RAG pipelines fail silently in Indian production environments. Introducing a translation layer into an English-centric system degrades semantic fidelity—GST provisions, legal constraints, and precise numerical thresholds are systematically distorted. A system reporting 90% accuracy in English but 65% in Hindi is not multilingual; it is an English pipeline with superficial language coverage. In this architecture, cross-lingual alignment and robust Devanagari Unicode handling are treated as first-order requirements, with deployment gated if the Hindi-to-English faithfulness ratio drops below 0.97.
 
 ## 🎯 What This System Solves
 
