@@ -4,7 +4,9 @@
 
 </div>
 
-**SmartDocs achieved 97%+ — Hindi Faithfulness (RAGAS evaluation result) 0.9069 cross-language Hindi/English cosine similarity.It is Multillingual Agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.**
+**SmartDocs achieved 97%+ — Hindi Faithfulness. 0.9069 cross-language Hindi/English cosine similarity.**
+
+**It is Multillingual Agentic RAG engineered for India's linguistic reality, processing legal, GST, and insurance documents natively across 22 languages without intermediate translation layers.**
 
 ---
 
